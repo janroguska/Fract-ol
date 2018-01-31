@@ -38,8 +38,8 @@ int		test_divergence(double c, double c2)
 
 	w = (3 / (double)WIDTH) * 1;
 	h = (4 / (double)HEIGHT) * 1;
-	x0 = (c * w) - 2;
-	y0 = (c2 * h) - 2;
+	x0 = ((c * w) - 2) + (3 / 1);
+	y0 = ((c2 * h) - 2) + (4 / 1);
 	x = 0;
 	y = 0;
 	j = 0;
