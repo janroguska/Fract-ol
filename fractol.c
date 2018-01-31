@@ -20,42 +20,57 @@ int		key_hook(int keycode, t_env *e)
 	return (0);
 }
 
-int		test_divergence(int c, int k)
+int		ft_round(double i)
 {
-	double	i;
-	int		c2;
-	int		k2;
+	return (i < 0 ? i - 0.5 : i + 0.5);
+}
 
-	c2 = 0;
-	k2 = 0;
-	while (j <= 100)
-	{ 
-		i = (z * z) + (c + k);
-		if (i < z)
-			return (0);
+int		test_divergence(double c, double c2)
+{
+	double	x0;
+	double	y0;
+	double	x;
+	double	y;
+	double	xtemp;
+	double	w;
+	double	h;
+	int		j;
+
+	w = (3 / (double)WIDTH) * 1;
+	h = (4 / (double)HEIGHT) * 1;
+	x0 = (c * w) - 2;
+	y0 = (c2 * h) - 2;
+	x = 0;
+	y = 0;
+	j = 0;
+	while (j <= 255)
+	{
+		xtemp = x * x - y * y + x0;
+		y = 2 * x * y + y0;
+		x = xtemp; 
+		if (x * x + y * y > 4)
+			return (1);
 		j++;
-		z = i;
 	}
-	return (1);
+	return (0);
 }
 
 void	draw(t_env *e)
 {
-	int		i;
+	double	i;
 	int		j;
-	int		k;
+	double	k;
 
 	i = 0;
-//	while (i < (HEIGHT * WIDTH))
 	while (i < HEIGHT)
 	{
 		k = 0;
 		while (k < WIDTH)
 		{
-			if ((j = test_divergence(0, i, k)) == 1)
-				e->addr[i] = 0xFFFFFF;
+			if ((j = test_divergence(k, i)) == 1)
+				e->addr[ft_round(k + (i * WIDTH))] = 0xFFFFFF;
 			else
-				e->addr[i] = 0x000000;
+				e->addr[ft_round(k + (i * WIDTH))] = 0x000000;
 			k++;
 		}
 		i++;
