@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __fractol_H
-# define __fractol_H
+#ifndef __FRACTOL_H
+# define __FRACTOL_H
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <unistd.h>
@@ -38,8 +38,33 @@ typedef	struct	s_env
 	void	*mlx;
 	void	*win;
 	void	*img;
-
+	double	x0;
+	double	y0;
+	double	x;
+	double	y;
+	double	xtemp;
+	double	w;
+	double	h;
+	int		j;
+	double	i;
+	double	k;
+	int		fractal;
 }				t_env;
 
-#endif
+typedef	struct	s_mouse
+{
+	int		zoom;
+	int		x;
+	int		y;
+}				t_mouse;
 
+int				main(int argc, char **argv);
+int				draw(t_env *e, t_mouse *m);
+int				julia(t_env *e, t_mouse *m);
+int				mandelbrot(t_env *e, t_mouse *m);
+int				burning_ship(t_env *e, t_mouse *m);
+int				ft_round(double i);
+int				key_hook(int keycode);
+int				mouse_hook(int keycode, int x, int y, t_env *e);
+
+#endif
