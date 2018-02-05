@@ -25,8 +25,8 @@
 # include <math.h>
 # include <stdio.h>
 
-# define WIDTH 1280
-# define HEIGHT 720
+# define WIDTH 1920
+# define HEIGHT 1080
 # define POS(i) (i < 0 ? -i : i)
 
 typedef	struct	s_env
@@ -66,5 +66,7 @@ int				burning_ship(t_env *e, t_mouse *m);
 int				ft_round(double i);
 int				key_hook(int keycode);
 int				mouse_hook(int keycode, int x, int y, t_env *e);
+int				tricorn(t_env *e, t_mouse *m);
+void			colour(int j, t_env *e);
 
 #endif

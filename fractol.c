@@ -38,8 +38,9 @@ int		mouse_hook(int keycode, int x, int y, t_env *e)
 	{
 		m.x = x;
 		m.y = y;
-		draw(e, &m);
 	}
+	printf("%d\t%d\n", m.x, m.y);
+	draw(e, &m);
 	return (0);
 }
 
@@ -64,6 +65,8 @@ int		main(int argc, char **argv)
 		e.fractal = 1;
 	else if (ft_strcmp("julia", argv[1]) == 0)
 		e.fractal = 2;
+	else if (ft_strcmp("tricorn", argv[1]) == 0)
+		e.fractal = 3;
 	else
 		exit(0);
 	e.mlx = mlx_init();

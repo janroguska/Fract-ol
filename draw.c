@@ -24,15 +24,15 @@ int		burning_ship(t_env *e, t_mouse *m)
 {
 	int		i;
 
-	e->w = (5 / (double)WIDTH);
-	e->h = (3 / (double)HEIGHT);
-	e->x0 = (m->x * e->w) + ((e->k * e->w) / m->zoom);
-	e->y0 = (m->y * e->h) + ((e->i * e->h) / m->zoom);
+	e->w = 5 / (double)WIDTH;
+	e->h = 3 / (double)HEIGHT;
+	e->x0 = (m->x * e->w) + (e->k * e->w) / m->zoom;
+	e->y0 = (m->y * e->h) + (e->i * e->h) / m->zoom;
 	e->x = 0;
 	e->y = 0;
 	e->j = 0;
 	i = 0;
-	while (e->j <= 255)
+	while ((e->x * e->x + e->y * e->y) < 4 && e->j <= 255)
 	{
 		e->xtemp = (POS(e->x * e->x) - POS(e->y * e->y) + e->x0) - 3;
 		e->y = (POS(2 * e->x * e->y) + e->y0) - 1.5;
@@ -50,18 +50,18 @@ int		mandelbrot(t_env *e, t_mouse *m)
 
 	e->w = 3.5 / (double)WIDTH;
 	e->h = 2 / (double)HEIGHT;
-	e->x0 = (m->x * e->w) + ((e->k * e->w) / m->zoom);
-	e->y0 = (m->y * e->h) + ((e->i * e->h) / m->zoom);
+	e->x0 = (m->x * e->w) + (e->k * e->w) / m->zoom;
+	e->y0 = (m->y * e->h) + (e->i * e->h) / m->zoom;
 	e->x = 0;
 	e->y = 0;
 	e->j = 0;
 	i = 0;
-	while (e->j <= 255)
+	while ((e->x * e->x + e->y * e->y) < 4 && e->j <= 255)
 	{
 		e->xtemp = ((e->x * e->x) - (e->y * e->y) + e->x0) - 2.5;
 		e->y = ((2 * e->x * e->y) + e->y0) - 1;
 		e->x = e->xtemp;
-		if (e->x * e->x + e->y * e->y > 4)
+		if ((e->x * e->x + e->y * e->y) > 4)
 			i = e->j;
 		e->j++;
 	}
@@ -74,8 +74,8 @@ int		julia(t_env *e, t_mouse *m)
 	e->h = (3 / (double)HEIGHT) * m->zoom;
 	e->x0 = ((e->k * e->w) - 2.5) * 5 / 5;
 	e->y0 = ((e->i * e->h) - 1.5) * 3 / 3;
-	e->x = 0.0;
-	e->y = 0.0;
+	e->x = 0;
+	e->y = 0;
 	e->j = 0;
 	while (e->j <= 255)
 	{
@@ -87,6 +87,30 @@ int		julia(t_env *e, t_mouse *m)
 		e->j++;
 	}
 	return (0);
+}
+
+int		tricorn(t_env *e, t_mouse *m)
+{
+	int		i;
+
+	e->w = 3.5 / (double)WIDTH;
+	e->h = 2 / (double)HEIGHT;
+	e->x0 = (m->x * e->w) + (e->k * e->w) / m->zoom;
+	e->y0 = (m->y * e->h) + (e->i * e->h) / m->zoom;
+	e->x = 0;
+	e->y = 0;
+	e->j = 0;
+	i = 0;
+	while ((e->x * e->x + e->y * e->y) < 4 && e->j <= 255)
+	{
+		e->xtemp = ((e->x * e->x) - (e->y * e->y) + e->x0) - 2.5;
+		e->y = (-2 * e->x * e->y + e->y0) - 1;
+		e->x = e->xtemp;
+		if ((e->x * e->x + e->y * e->y) > 4)
+			i = e->j;
+		e->j++;
+	}
+	return (i);
 }
 
 int		draw(t_env *e, t_mouse *m)
@@ -105,6 +129,8 @@ int		draw(t_env *e, t_mouse *m)
 				j = burning_ship(e, m);
 			if (e->fractal == 2)
 				j = julia(e, m);
+			if (e->fractal == 3)
+				j = tricorn(e, m);
 			if (j != 0)
 				colour(j, e);
 			else
