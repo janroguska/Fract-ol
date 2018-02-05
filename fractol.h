@@ -25,8 +25,8 @@
 # include <math.h>
 # include <stdio.h>
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1280
+# define HEIGHT 720
 # define POS(i) (i < 0 ? -i : i)
 
 typedef	struct	s_env
@@ -53,7 +53,7 @@ typedef	struct	s_env
 
 typedef	struct	s_mouse
 {
-	int		zoom;
+	double	zoom;
 	int		x;
 	int		y;
 }				t_mouse;

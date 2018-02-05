@@ -24,26 +24,22 @@ int		mouse_hook(int keycode, int x, int y, t_env *e)
 {
 	static	t_mouse	m;
 
-	printf("x: %d\ty: %d\t%d\n", x, y, keycode);
 	if (m.zoom == 0)
 	{
 		m.x = 0;
 		m.y = 0;
 		m.zoom++;
 	}
-	if (keycode == 7)
-	{
-		m.x = WIDTH / x;
-		m.y = HEIGHT / y;
-		m.zoom += 0.1;
-	}
+	if (keycode == 2)
+		m.zoom *= 0.9;
 	else if (keycode == 1)
+		m.zoom *= 1.1;
+	if (x >= 0 && y >= 0)
 	{
-		m.x = WIDTH / x;
-		m.y = HEIGHT / y;
-		m.zoom--;
+		m.x = x;
+		m.y = y;
+		draw(e, &m);
 	}
-	draw(e, &m);
 	return (0);
 }
 
