@@ -19,9 +19,9 @@ void	colour(int j, t_env *e)
 	int		green;
 	int		blue;
 
-	red = j;
-	green = j;
-	blue = j;
+	red = 0x00 + j;
+	green = 0x00 + j;
+	blue = 0x00 + j;
 	colour = red + green + blue;
 	e->addr[ft_round(e->k + (e->i * WIDTH))] = colour;
 }
