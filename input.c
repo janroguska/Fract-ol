@@ -29,9 +29,9 @@ int		mouse_hook(int keycode, int x, int y, t_env *e)
 		m.y = 0;
 		m.zoom++;
 	}
-	if (keycode == 2)
+	if (keycode == 4)
 		m.zoom *= 0.9;
-	else if (keycode == 1)
+	else if (keycode == 5)
 		m.zoom *= 1.1;
 	if (x >= 0 && y >= 0)
 	{
