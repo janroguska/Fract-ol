@@ -25,9 +25,12 @@
 # include <math.h>
 # include <stdio.h>
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 800
+# define HEIGHT 600
 # define POS(i) (i < 0 ? -i : i)
+# define ESC 53
+# define MOTION_NOTIFY 6
+# define MOTION_MASK (1L<<6)
 
 typedef	struct	s_env
 {
@@ -68,5 +71,7 @@ int				key_hook(int keycode);
 int				mouse_hook(int keycode, int x, int y, t_env *e);
 int				tricorn(t_env *e, t_mouse *m);
 void			colour(int j, t_env *e);
+int				mouse_move(int x, int y, t_env *e);
+int				draw_julia(t_env *e, t_mouse *m);
 
 #endif

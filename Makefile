@@ -12,7 +12,7 @@
 
 NAME = fractol
 
-SRC = fractol.c draw.c
+SRC = fractol.c draw.c fractals.c input.c
 
 OBJ = $(SRC:.c=.o)
 
