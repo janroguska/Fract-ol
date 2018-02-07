@@ -18,10 +18,20 @@ void	colour(int j, t_env *e)
 	int		red;
 	int		green;
 	int		blue;
+	int		hex;
+	int		tmp;
 
-	red = 0x00 + j;
-	green = 0x00 + j;
-	blue = 0x00 + j;
+	tmp = 0;
+	while (j >= 1)
+	{
+		hex = j % 16;
+		tmp += hex;
+		tmp *= 10;
+		j /= 16;
+	}
+	red = 0xff0000;
+	green = tmp;
+	blue = tmp;
 	colour = red + green + blue;
 	e->addr[ft_round(e->k + (e->i * WIDTH))] = colour;
 }
