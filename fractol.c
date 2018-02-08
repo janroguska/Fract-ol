@@ -37,7 +37,7 @@ int		main(int argc, char **argv)
 	t_env	e;
 
 	e.zoomx = 5;
-	e.zoomy = e.zoomx / WIDTH * HEIGHT;
+	e.zoomy = 4;
 	e.x1 = 0;
 	e.y1 = 0;
 	if (argc != 2)
