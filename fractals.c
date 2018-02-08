@@ -12,14 +12,14 @@
 
 #include "fractol.h"
 
-int		burning_ship(t_env *e, t_mouse *m)
+int		burning_ship(t_env *e)
 {
 	int		i;
 
 	e->w = 5 / (double)WIDTH;
 	e->h = 4 / (double)HEIGHT;
-	e->x0 = (m->x * e->w) + (e->k * e->w) / m->zoom;
-	e->y0 = (m->y * e->h) + (e->i * e->h) / m->zoom;
+	e->x0 = (e->x1 * e->w) + (e->k * e->w) / e->zoom;
+	e->y0 = (e->y1 * e->h) + (e->i * e->h) / e->zoom;
 	e->x = 0;
 	e->y = 0;
 	e->j = 0;
@@ -36,22 +36,33 @@ int		burning_ship(t_env *e, t_mouse *m)
 	return (i);
 }
 
-int		mandelbrot(t_env *e, t_mouse *m)
+int		mandelbrot(t_env *e)
 {
 	int		i;
+	double	xscalechange;
+	double	yscalechange;
+	double	w1;
+	double	h1;
 
-	e->w = 5 / (double)WIDTH;
-	e->h = 4 / (double)HEIGHT;
-	e->x0 = (m->x * e->w) + (e->k * e->w) / m->zoom;
-	e->y0 = (m->y * e->h) + (e->i * e->h) / m->zoom;
+	w1 = (e->scalex1 / (double)WIDTH);
+	h1 = (e->scaley1 / (double)HEIGHT);
+	e->w = (e->scalex / (double)WIDTH);
+	e->h = (e->scaley / (double)HEIGHT);
+	xscalechange = w1 - e->w;
+	yscalechange = h1 - e->h;
+	// e->x0 = (e->k * e->w) + (e->x1 * e->w) * xscalechange;
+	// e->y0 = (e->i * e->h) + (e->y1 * e->h) * yscalechange;
+	e->x0 = (e->k * e->w);
+	e->y0 = (e->i * e->h);
 	e->x = 0;
 	e->y = 0;
 	e->j = 0;
+	i = e->zoom;
 	i = 0;
 	while ((e->x * e->x + e->y * e->y) < 4 && e->j <= 255)
 	{
-		e->xtemp = ((e->x * e->x) - (e->y * e->y) + e->x0) - 2.5;
-		e->y = ((2 * e->x * e->y) + e->y0) - 2;
+		e->xtemp = ((e->x * e->x) - (e->y * e->y) + e->x0) - (e->scalex / 2);
+		e->y = ((2 * e->x * e->y) + e->y0) - (e->scaley / 2);
 		e->x = e->xtemp;
 		if ((e->x * e->x + e->y * e->y) > 4)
 			i = e->j;
@@ -60,7 +71,7 @@ int		mandelbrot(t_env *e, t_mouse *m)
 	return (i);
 }
 
-int		julia(t_env *e, t_mouse *m)
+int		julia(t_env *e)
 {
 	int		i;
 
@@ -68,10 +79,10 @@ int		julia(t_env *e, t_mouse *m)
 	e->h = 4 / (double)HEIGHT;
 	e->x0 = (e->k * e->w) - 2.5;
 	e->y0 = (e->i * e->h) - 2;
-	if (m->x > 0 || m->y > 0)
+	if (e->x1 > 0 || e->y1 > 0)
 	{
-		e->x = (m->x / ((double)WIDTH / 2) - 1);
-		e->y = (m->y / ((double)HEIGHT / 2) - 1);
+		e->x = (e->x1 / ((double)WIDTH / 2) - 1);
+		e->y = (e->y1 / ((double)HEIGHT / 2) - 1);
 	}
 	e->j = 0;
 	i = 0;
@@ -87,14 +98,14 @@ int		julia(t_env *e, t_mouse *m)
 	return (i);
 }
 
-int		tricorn(t_env *e, t_mouse *m)
+int		tricorn(t_env *e)
 {
 	int		i;
 
 	e->w = 5 / (double)WIDTH;
 	e->h = 4 / (double)HEIGHT;
-	e->x0 = (m->x * e->w) + (e->k * e->w) / m->zoom;
-	e->y0 = (m->y * e->h) + (e->i * e->h) / m->zoom;
+	e->x0 = (e->x1 * e->w) + (e->k * e->w) / e->zoom;
+	e->y0 = (e->y1 * e->h) + (e->i * e->h) / e->zoom;
 	e->x = 0;
 	e->y = 0;
 	e->j = 0;

@@ -12,47 +12,53 @@
 
 #include "fractol.h"
 
-int		key_hook(int keycode)
+int		key_hook(int keycode, t_env *e)
 {
 	if (keycode == ESC)
 		exit(0);
+	else if (keycode == BLUE)
+		e->colour = 0;
+	else if (keycode == RED)
+		e->colour = 1;
+	else if (keycode == GREEN)
+		e->colour = 2;
+	if (e->fractal != 2)
+		draw(e);
+	else
+		draw_julia(e);
 	return (0);
 }
 
 int		mouse_hook(int keycode, int x, int y, t_env *e)
 {
-	static	t_mouse	m;
-
-	if (m.zoom == 0)
+	if (e->zoom == 0)
 	{
-		m.x = 0;
-		m.y = 0;
-		m.zoom++;
+		e->x1 = 0;
+		e->y1 = 0;
+		e->zoom++;
 	}
-	if (keycode == 4)
-		m.zoom *= 0.9;
-	else if (keycode == 5)
-		m.zoom *= 1.1;
+	if (keycode == 7 || keycode == 2)
+		e->zoom *= 0.9;
+	else if (keycode == 6 || keycode == 1)
+		e->zoom *= 1.1;
 	if (x >= 0 && y >= 0)
 	{
-		m.x = x;
-		m.y = y;
+		e->x1 = x;
+		e->y1 = y;
 	}
 	if (e->fractal == 2)
 		return (0);
-	draw(e, &m);
+	draw(e);
 	return (0);
 }
 
 int		mouse_move(int x, int y, t_env *e)
 {
-	t_mouse	m;
-
 	if (x >= 0 && y >= 0)
 	{
-		m.x = x;
-		m.y = y;
+		e->x1 = x;
+		e->y1 = y;
 	}
-	draw_julia(e, &m);
+	draw_julia(e);
 	return (0);
 }

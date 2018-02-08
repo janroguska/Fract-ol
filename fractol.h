@@ -31,6 +31,9 @@
 # define ESC 53
 # define MOTION_NOTIFY 6
 # define MOTION_MASK (1L<<6)
+# define RED 15
+# define GREEN 5
+# define BLUE 11
 
 typedef	struct	s_env
 {
@@ -52,26 +55,28 @@ typedef	struct	s_env
 	double	i;
 	double	k;
 	int		fractal;
+	double	scalex;
+	double	scaley;
+	double	scalex1;
+	double	scaley1;
+	int		colour;
+	double	zoom;
+	double	x1;
+	double	y1;
+	int		count;
 }				t_env;
 
-typedef	struct	s_mouse
-{
-	double	zoom;
-	int		x;
-	int		y;
-}				t_mouse;
-
 int				main(int argc, char **argv);
-int				draw(t_env *e, t_mouse *m);
-int				julia(t_env *e, t_mouse *m);
-int				mandelbrot(t_env *e, t_mouse *m);
-int				burning_ship(t_env *e, t_mouse *m);
+int				draw(t_env *e);
+int				julia(t_env *e);
+int				mandelbrot(t_env *e);
+int				burning_ship(t_env *e);
 int				ft_round(double i);
-int				key_hook(int keycode);
+int				key_hook(int keycode, t_env *e);
 int				mouse_hook(int keycode, int x, int y, t_env *e);
-int				tricorn(t_env *e, t_mouse *m);
+int				tricorn(t_env *e);
 void			colour(int j, t_env *e);
 int				mouse_move(int x, int y, t_env *e);
-int				draw_julia(t_env *e, t_mouse *m);
+int				draw_julia(t_env *e);
 
 #endif

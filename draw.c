@@ -14,19 +14,28 @@
 
 void	colour(int j, t_env *e)
 {
-	int		colour;
 	int		red;
 	int		green;
 	int		blue;
+	int		hex;
+	int		tmp;
 
-	red = 0x00 + j;
-	green = 0x00 + j;
-	blue = 0x00 + j;
-	colour = red + green + blue;
-	e->addr[ft_round(e->k + (e->i * WIDTH))] = colour;
+	tmp = 0;
+	while (j >= 1)
+	{
+		hex = j % 255;
+		hex *= 10;
+		tmp += hex;
+		tmp *= 10;
+		j /= 255;
+	}
+	red = (e->colour == 0 ? tmp : 0xff0000);
+	green = (e->colour == 1 ? tmp : 0x00ff00);
+	blue = (e->colour == 2 ? tmp : 0x0000ff);
+	e->addr[ft_round(e->k + (e->i * WIDTH))] = red + green + blue;
 }
 
-int		draw_julia(t_env *e, t_mouse *m)
+int		draw_julia(t_env *e)
 {
 	int		j;
 
@@ -38,7 +47,7 @@ int		draw_julia(t_env *e, t_mouse *m)
 		e->k = 0;
 		while (e->k < WIDTH)
 		{
-			j = julia(e, m);
+			j = julia(e);
 			if (j != 0)
 				colour(j, e);
 			else
@@ -51,22 +60,26 @@ int		draw_julia(t_env *e, t_mouse *m)
 	return (0);
 }
 
-int		draw(t_env *e, t_mouse *m)
+int		draw(t_env *e)
 {
 	int		j;
 
 	e->i = 0;
+	e->scalex1 = e->scalex;
+	e->scaley1 = e->scaley;
+	e->scalex /= e->zoom;
+	e->scaley /= e->zoom;
 	while (e->i < HEIGHT)
 	{
 		e->k = 0;
 		while (e->k < WIDTH)
 		{
 			if (e->fractal == 0)
-				j = mandelbrot(e, m);
+				j = mandelbrot(e);
 			if (e->fractal == 1)
-				j = burning_ship(e, m);
+				j = burning_ship(e);
 			if (e->fractal == 3)
-				j = tricorn(e, m);
+				j = tricorn(e);
 			if (j != 0)
 				colour(j, e);
 			else
