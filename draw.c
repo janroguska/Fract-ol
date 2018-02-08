@@ -23,6 +23,7 @@ void	colour(int j, t_env *e)
 	tmp = 0;
 	while (j >= 1)
 	{
+<<<<<<< HEAD
 		hex = j % 255;
 		hex *= 10;
 		tmp += hex;
@@ -33,6 +34,18 @@ void	colour(int j, t_env *e)
 	green = (e->colour == 1 ? tmp : 0x00ff00);
 	blue = (e->colour == 2 ? tmp : 0x0000ff);
 	e->addr[ft_round(e->k + (e->i * WIDTH))] = red + green + blue;
+=======
+		hex = j % 16;
+		tmp += hex;
+		tmp *= 10;
+		j /= 16;
+	}
+	red = 0xff0000;
+	green = tmp;
+	blue = tmp;
+	colour = red + green + blue;
+	e->addr[ft_round(e->k + (e->i * WIDTH))] = colour;
+>>>>>>> 33620474d39bce6e638337a18e4df415158142f3
 }
 
 int		draw_julia(t_env *e)
