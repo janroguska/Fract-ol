@@ -55,15 +55,11 @@ typedef	struct	s_env
 	double	i;
 	double	k;
 	int		fractal;
-	double	scalex;
-	double	scaley;
-	double	scalex1;
-	double	scaley1;
 	int		colour;
-	double	zoom;
+	double	zoomx;
+	double	zoomy;
 	double	x1;
 	double	y1;
-	int		count;
 }				t_env;
 
 int				main(int argc, char **argv);

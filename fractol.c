@@ -36,11 +36,10 @@ int		main(int argc, char **argv)
 {
 	t_env	e;
 
-	e.zoom = 1;
+	e.zoomx = 5;
+	e.zoomy = e.zoomx / WIDTH * HEIGHT;
 	e.x1 = 0;
 	e.y1 = 0;
-	e.scalex = 5;
-	e.scaley = 4;
 	if (argc != 2)
 		return (0);
 	e.fractal = get_fractal(argv[1]);

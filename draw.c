@@ -66,10 +66,6 @@ int		draw(t_env *e)
 	int		j;
 
 	e->i = 0;
-	e->scalex1 = e->scalex;
-	e->scaley1 = e->scaley;
-	e->scalex /= e->zoom;
-	e->scaley /= e->zoom;
 	while (e->i < HEIGHT)
 	{
 		e->k = 0;

@@ -31,20 +31,20 @@ int		key_hook(int keycode, t_env *e)
 
 int		mouse_hook(int keycode, int x, int y, t_env *e)
 {
-	if (e->zoom == 0)
+		if (x >= 0 && y >= 0)
 	{
-		e->x1 = 0;
-		e->y1 = 0;
-		e->zoom++;
+		e->x1 = (x - WIDTH / 2) * e->zoomx;
+		e->y1 = (y - HEIGHT / 2) * e->zoomy;
 	}
-	if (keycode == 7 || keycode == 2)
-		e->zoom *= 0.9;
-	else if (keycode == 6 || keycode == 1)
-		e->zoom *= 1.1;
-	if (x >= 0 && y >= 0)
+	if ((keycode == 7 || keycode == 1) && e->zoomx > 0.000001)
 	{
-		e->x1 = x;
-		e->y1 = y;
+		e->zoomx *= 0.9;
+		e->zoomy *= 0.9;
+	}
+	else if ((keycode == 6 || keycode == 2) && e->zoomx > 0.000001)
+	{
+		e->zoomx *= 1.1;
+		e->zoomy *= 1.1;
 	}
 	if (e->fractal == 2)
 		return (0);
