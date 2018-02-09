@@ -31,11 +31,13 @@ int		key_hook(int keycode, t_env *e)
 
 int		mouse_hook(int keycode, int x, int y, t_env *e)
 {
-		if (x >= 0 && y >= 0)
+	if (x >= 0 && y >= 0)
 	{
-		e->x1 = (x - WIDTH / 2) * e->zoomx;
-		e->y1 = (y - HEIGHT / 2) * e->zoomy;
+		e->x1 = x;// / (double)WIDTH;
+		e->y1 = y;// / (double)HEIGHT;
 	}
+	else
+		return (0);
 	if ((keycode == 7 || keycode == 1) && e->zoomx > 0.000001)
 	{
 		e->zoomx *= 0.9;

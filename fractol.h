@@ -60,6 +60,12 @@ typedef	struct	s_env
 	double	zoomy;
 	double	x1;
 	double	y1;
+	double	xmin;
+	double	xmax;
+	double	ymin;
+	double	ymax;
+	double	scalex;
+	double	scaley;
 }				t_env;
 
 int				main(int argc, char **argv);

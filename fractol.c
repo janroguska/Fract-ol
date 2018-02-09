@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
 int		ft_round(double i)
 {
@@ -36,10 +35,12 @@ int		main(int argc, char **argv)
 {
 	t_env	e;
 
-	e.zoomx = 5;
-	e.zoomy = 4;
+	e.zoomx = 1;
+	e.zoomy = 1;
 	e.x1 = 0;
 	e.y1 = 0;
+	e.xmax = (double)WIDTH;
+	e.ymax = (double)HEIGHT;
 	if (argc != 2)
 		return (0);
 	e.fractal = get_fractal(argv[1]);
