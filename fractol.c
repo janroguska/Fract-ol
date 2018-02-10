@@ -35,8 +35,8 @@ int		main(int argc, char **argv)
 {
 	t_env	e;
 
-	e.zoomx = 1;
-	e.zoomy = 1;
+	e.zoomx = 5;
+	e.zoomy = 4;
 	e.x1 = 0;
 	e.y1 = 0;
 	e.xmax = (double)WIDTH;
