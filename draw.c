@@ -30,8 +30,8 @@ void	colour(int j, t_env *e)
 		j /= 255;
 	}
 	red = (e->colour == 0 ? tmp : 0xff0000);
-	green = (e->colour == 1 ? tmp : 0x00ff00);
-	blue = (e->colour == 2 ? tmp : 0x0000ff);
+	green = (e->colour == 1 ? tmp : 0x00f000);
+	blue = (e->colour == 2 ? tmp : 0x0000f0);
 	e->addr[ft_round(e->k + (e->i * WIDTH))] = red + green + blue;
 
 }

@@ -14,23 +14,12 @@
 
 void	get_x0_y0(t_env *e)
 {
-	// e->x0 = e->k - WIDTH / 2.0;
-	// e->y0 = e->i - HEIGHT / 2.0;
-	// e->x0 = e->x0 / (double)WIDTH * e->zoomx;
-	// e->y0 = e->y0 / (double)HEIGHT * e->zoomy;
-	// e->x0 += e->x1;
-	// e->y0 += e->y1;
-
-	e->xmin = ((e->x1 / (double)WIDTH) * (1 / e->zoomx)) * (double)WIDTH;
-	e->ymin = ((e->y1 / (double)HEIGHT) * (1 / e->zoomy)) * (double)HEIGHT;
-	e->xmax = ((double)WIDTH - ((1 - (e->x1 / (double)WIDTH)) * (1 / e->zoomx)) * (double)WIDTH);
-	e->ymax = ((double)HEIGHT - ((1 - (e->y1 / (double)HEIGHT)) * (1 / e->zoomy)) * (double)HEIGHT);
 	e->x0 = e->k - WIDTH / 2.0;
 	e->y0 = e->i - HEIGHT / 2.0;
 	e->x0 = e->x0 / (double)WIDTH * e->zoomx;
 	e->y0 = e->y0 / (double)HEIGHT * e->zoomy;
-	e->x0 += (e->xmin / (double)WIDTH * e->zoomx);
-	e->x0 += (e->ymin / (double)HEIGHT * e->zoomy);
+	e->x0 += (e->xcentre / (double)WIDTH);
+	e->y0 += (e->ycentre / (double)HEIGHT);
 }
 
 int		burning_ship(t_env *e)

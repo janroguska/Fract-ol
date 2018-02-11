@@ -39,8 +39,8 @@ int		main(int argc, char **argv)
 	e.zoomy = 4;
 	e.x1 = 0;
 	e.y1 = 0;
-	e.xmax = (double)WIDTH;
-	e.ymax = (double)HEIGHT;
+	e.xcentre = 0;
+	e.ycentre = 0;
 	if (argc != 2)
 		return (0);
 	e.fractal = get_fractal(argv[1]);
