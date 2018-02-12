@@ -14,10 +14,12 @@
 
 void	get_x0_y0(t_env *e)
 {
+	e->w = e->zoomx / (double)WIDTH;
+	e->h = e->zoomy / (double)HEIGHT;
 	e->x0 = e->k - WIDTH / 2.0;
 	e->y0 = e->i - HEIGHT / 2.0;
-	e->x0 = e->x0 / (double)WIDTH * e->zoomx;
-	e->y0 = e->y0 / (double)HEIGHT * e->zoomy;
+	e->x0 = (e->x0 * e->w);
+	e->y0 = (e->y0 * e->h);
 	e->x0 += (e->xcentre / (double)WIDTH);
 	e->y0 += (e->ycentre / (double)HEIGHT);
 }
@@ -43,35 +45,65 @@ int		burning_ship(t_env *e)
 	return (i);
 }
 
-int		mandelbrot(t_env *e)
+// int		mandelbrot(t_env *e)
+// {
+// 	int		i;
+
+// 	get_x0_y0(e);
+// 	e->x = 0;
+// 	e->y = 0;
+// 	e->j = 0;
+// 	i = 0;
+// 	while ((e->x * e->x + e->y * e->y) < 4 && e->j <= 255)
+// 	{
+// 		e->xtemp = ((e->x * e->x) - (e->y * e->y) + e->x0);
+// 		e->y = ((2 * e->x * e->y) + e->y0);
+// 		e->x = e->xtemp;
+// 		if ((e->x * e->x + e->y * e->y) > 4)
+// 			i = e->j;
+// 		e->j++;
+// 	}
+// 	return (i);
+// }
+
+int		mandelbrot(t_env *e, int row)
 {
 	int		i;
+	int		x;
+	int		y;
 
+ft_putendl("HELLO");
 	get_x0_y0(e);
 	e->x = 0;
 	e->y = 0;
 	e->j = 0;
 	i = 0;
-	while ((e->x * e->x + e->y * e->y) < 4 && e->j <= 255)
+	x = -1;
+	y = row;
+	while (++x < WIDTH)
 	{
-		e->xtemp = ((e->x * e->x) - (e->y * e->y) + e->x0);
-		e->y = ((2 * e->x * e->y) + e->y0);
-		e->x = e->xtemp;
-		if ((e->x * e->x + e->y * e->y) > 4)
-			i = e->j;
-		e->j++;
+		while (y < row + WIDTH)
+		{
+			while ((e->x * e->x + e->y * e->y) < 4 && e->j <= 255)
+			{
+				e->xtemp = ((e->x * e->x) - (e->y * e->y) + e->x0);
+				e->y = ((2 * e->x * e->y) + e->y0);
+				e->x = e->xtemp;
+				if ((e->x * e->x + e->y * e->y) > 4)
+					e->iteration = e->j;
+				e->j++;
+			}
+			y++;
+		}
 	}
-	return (i);
+	return (e->iteration);
 }
 
 int		julia(t_env *e)
 {
 	int		i;
 
-	e->w = 5 / (double)WIDTH;
-	e->h = 4 / (double)HEIGHT;
-	e->x0 = (e->k * e->w) - 2.5;
-	e->y0 = (e->i * e->h) - 2;
+	get_x0_y0(e);
 	if (e->x1 > 0 || e->y1 > 0)
 	{
 		e->x = (e->x1 / ((double)WIDTH / 2) - 1);
@@ -79,7 +111,7 @@ int		julia(t_env *e)
 	}
 	e->j = 0;
 	i = 0;
-	while (e->j <= 255)
+	while ((e->x0 * e->x0 + e->y0 * e->y0) < 4 && e->j <= 255)
 	{
 		e->xtemp = (e->x0 * e->x0) - (e->y0 * e->y0);
 		e->y0 = (2 * e->x0 * e->y0) + e->y;

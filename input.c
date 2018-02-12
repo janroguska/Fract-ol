@@ -51,7 +51,7 @@ int		mouse_hook(int keycode, int x, int y, t_env *e)
 		e->zoomy *= 1.1;
 	}
 	if (e->fractal == 2)
-		return (0);
+		draw_julia(e);
 	draw(e);
 	return (0);
 }
