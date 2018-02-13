@@ -22,6 +22,18 @@ int		key_hook(int keycode, t_env *e)
 		e->colour = 1;
 	else if (keycode == GREEN)
 		e->colour = 2;
+	else if (keycode == PLUS)
+		e->iteration *= 0.8;
+	else if (keycode == MINUS && e->iteration <= 256)
+		e->iteration *= 1.2;
+	else if (keycode == LEFT)
+		e->across += 0.1;
+	else if (keycode == RIGHT)
+		e->across -= 0.1;
+	else if (keycode == UP)
+		e->up -= 0.1;
+	else if (keycode == DOWN)
+		e->up += 0.1;
 	if (e->fractal != 2)
 		draw(e);
 	else
@@ -40,19 +52,20 @@ int		mouse_hook(int keycode, int x, int y, t_env *e)
 	}
 	else
 		return (0);
-	if ((keycode == 7 || keycode == 1) && e->zoomx > 0.000001)
+	if ((keycode == 4 || keycode == 1) && e->zoomx > 0.000001)
 	{
-		e->zoomx *= 0.9;
-		e->zoomy *= 0.9;
+		e->zoomx *= 0.5;
+		e->zoomy *= 0.5;
 	}
-	else if ((keycode == 6 || keycode == 2) && e->zoomx > 0.000001)
+	else if ((keycode == 5 || keycode == 2) && e->zoomx > 0.000001)
 	{
-		e->zoomx *= 1.1;
-		e->zoomy *= 1.1;
+		e->zoomx *= 1.5;
+		e->zoomy *= 1.5;
 	}
 	if (e->fractal == 2)
 		draw_julia(e);
-	draw(e);
+	else
+		draw(e);
 	return (0);
 }
 

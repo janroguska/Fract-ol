@@ -28,21 +28,38 @@ int		get_fractal(char *argv)
 	else if (ft_strcmp("tricorn", argv) == 0)
 		return (3);
 	else
+	{
+		ft_putendl("usage: fractal [fractals]\nfractals:");
+		ft_putendl("* mandelbrot\n* burning_ship\n* tricorn\n* julia");
 		exit(0);
+	}
+}
+
+void	init_values(t_env *e)
+{
+	e->zoomx = 5;
+	e->zoomy = 4;
+	e->x1 = 0;
+	e->y1 = 0;
+	e->xcentre = 0;
+	e->ycentre = 0;
+	e->iteration = 256;
+	e->colour = 0;
+	e->across = 0;
+	e->up = 0;
 }
 
 int		main(int argc, char **argv)
 {
 	t_env	e;
 
-	e.zoomx = 5;
-	e.zoomy = 4;
-	e.x1 = 0;
-	e.y1 = 0;
-	e.xcentre = 0;
-	e.ycentre = 0;
+	init_values(&e);
 	if (argc != 2)
+	{
+		ft_putendl("usage: fractal [fractals]\nfractals:");
+		ft_putendl("* mandelbrot\n* burning_ship\n* tricorn\n* julia");
 		return (0);
+	}
 	e.fractal = get_fractal(argv[1]);
 	e.mlx = mlx_init();
 	e.win = mlx_new_window(e.mlx, WIDTH, HEIGHT, argv[1]);

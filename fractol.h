@@ -23,8 +23,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
-# include <stdio.h>
-# include <pthread.h>
 
 # define WIDTH 800
 # define HEIGHT 600
@@ -36,6 +34,12 @@
 # define GREEN 5
 # define BLUE 11
 # define PURPLE 35
+# define PLUS 24
+# define MINUS 27
+# define UP 126
+# define DOWN 125
+# define LEFT 124
+# define RIGHT 123
 
 typedef	struct	s_env
 {
@@ -64,14 +68,15 @@ typedef	struct	s_env
 	double	y1;
 	double	xcentre;
 	double	ycentre;
-	int		iteration;
+	double	iteration;
+	double	up;
+	double	across;
 }				t_env;
 
 int				main(int argc, char **argv);
 int				draw(t_env *e);
 int				julia(t_env *e);
-int				mandelbrot(t_env *e, int row);
-//int				mandelbrot(t_env *e);
+int				mandelbrot(t_env *e);
 int				burning_ship(t_env *e);
 int				ft_round(double i);
 int				key_hook(int keycode, t_env *e);
@@ -80,6 +85,6 @@ int				tricorn(t_env *e);
 void			colour(int j, t_env *e);
 int				mouse_move(int x, int y, t_env *e);
 int				draw_julia(t_env *e);
-void			*fractal(void *row, t_env *e);
+void			init_values(t_env *e);
 
 #endif
