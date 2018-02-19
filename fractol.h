@@ -23,6 +23,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
+# include <pthread.h>
+# include <stdio.h>
 
 # define WIDTH 800
 # define HEIGHT 600
@@ -40,6 +42,7 @@
 # define DOWN 125
 # define LEFT 124
 # define RIGHT 123
+# define THREADS 4
 
 typedef	struct	s_env
 {
@@ -58,8 +61,10 @@ typedef	struct	s_env
 	double	w;
 	double	h;
 	int		j;
-	double	i;
-	double	k;
+	int		i;
+	int		k;
+	int		itmp;
+	int		ktmp;
 	int		fractal;
 	int		colour;
 	double	zoomx;
@@ -71,6 +76,7 @@ typedef	struct	s_env
 	double	iteration;
 	double	up;
 	double	across;
+	int		tid;
 }				t_env;
 
 int				main(int argc, char **argv);
@@ -86,5 +92,6 @@ void			colour(int j, t_env *e);
 int				mouse_move(int x, int y, t_env *e);
 int				draw_julia(t_env *e);
 void			init_values(t_env *e);
+void			*draw_thread(void *e);
 
 #endif

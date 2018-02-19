@@ -14,10 +14,12 @@
 
 void	get_x0_y0(t_env *e)
 {
+	e->ktmp = e->i / WIDTH;
+	e->itmp = e->i % WIDTH;
 	e->w = e->zoomx / (double)WIDTH;
 	e->h = e->zoomy / (double)HEIGHT;
-	e->x0 = e->k - WIDTH / 2.0;
-	e->y0 = e->i - HEIGHT / 2.0;
+	e->x0 = e->ktmp - WIDTH / 2.0;
+	e->y0 = e->itmp - HEIGHT / 2.0;
 	e->x0 = (e->x0 * e->w);
 	e->y0 = (e->y0 * e->h);
 	e->x0 += (e->xcentre / (double)WIDTH) + e->across;

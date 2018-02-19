@@ -47,6 +47,7 @@ void	init_values(t_env *e)
 	e->colour = 0;
 	e->across = 0;
 	e->up = 0;
+	e->tid = 0;
 }
 
 int		main(int argc, char **argv)
