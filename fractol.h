@@ -93,5 +93,6 @@ int				mouse_move(int x, int y, t_env *e);
 int				draw_julia(t_env *e);
 void			init_values(t_env *e);
 void			*draw_thread(void *e);
+void			*draw_julia_thread(void *e);
 
 #endif

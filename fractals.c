@@ -18,8 +18,8 @@ void	get_x0_y0(t_env *e)
 	e->itmp = e->i % WIDTH;
 	e->w = e->zoomx / (double)WIDTH;
 	e->h = e->zoomy / (double)HEIGHT;
-	e->x0 = e->ktmp - WIDTH / 2.0;
-	e->y0 = e->itmp - HEIGHT / 2.0;
+	e->x0 = e->itmp - WIDTH / 2.0;
+	e->y0 = e->ktmp - HEIGHT / 2.0;
 	e->x0 = (e->x0 * e->w);
 	e->y0 = (e->y0 * e->h);
 	e->x0 += (e->xcentre / (double)WIDTH) + e->across;
